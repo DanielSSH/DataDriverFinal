@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Driver</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin: 10px 0 30px;
+        }
+
+        header .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        header a {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            background-color: #e74c3c;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        header a:hover {
+            background-color: #c0392b;
+        }
+
+        nav {
+            background-color: #34495e;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #e74c3c;
+        }
+
+        .about, .services, .contact {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .about h2, .services h2, .contact h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .about p, .services p, .contact p {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .services .service {
+            display: inline-block;
+            width: 30%;
+            margin: 20px 10px;
+            padding: 30px;
+            background-color: #ecf0f1;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .services .service:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .services .service h3 {
+            font-size: 1.8rem;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+
+        .services .service p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .contact form input, .contact form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .contact form button {
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact form button:hover {
+            background-color: #c0392b;
+        }
+
+        footer {
+            background-color: #34495e;
+            color: #ecf0f1;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        footer a {
+            color: #e74c3c;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .services .service {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+
+            header .buttons-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Data Driver</h1>
+        <p>Verificación confiable y rápida de antecedentes de conductores.</p>
+        <div class="buttons-container">
+            <a href="#contact">Contáctanos</a>
+            <a href="/buscar-cedula">Buscar Conductor</a>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#about">Nosotros</a></li>
+            <li><a href="#services">Servicios</a></li>
+            <li><a href="#contact">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <section id="about" class="about">
+        <h2>Sobre Nosotros</h2>
+        <p>En Data Driver, nos dedicamos a proporcionar soluciones confiables para la verificación de antecedentes de conductores. Nuestro objetivo es garantizar la seguridad y confianza en cada viaje, asegurando que cada conductor cumpla con los más altos estándares.</p>
+    </section>
+
+    <section id="services" class="services">
+        <h2>Nuestros Servicios</h2>
+        <div class="service">
+            <h3>Verificación Completa</h3>
+            <p>Accede a un análisis exhaustivo de antecedentes para garantizar la confiabilidad de tus conductores.</p>
+        </div>
+        <div class="service">
+            <h3>Resultados Inmediatos</h3>
+            <p>Obtén información en tiempo real y toma decisiones rápidas y efectivas.</p>
+        </div>
+        <div class="service">
+            <h3>Confidencialidad Asegurada</h3>
+            <p>Protegemos la información sensible con los más altos estándares de seguridad.</p>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contacto</h2>
+        <p>¿Tienes alguna pregunta? No dudes en contactarnos a través del siguiente formulario.</p>
+        <form>
+            <input type="text" name="name" placeholder="Nombre" required>
+            <input type="email" name="email" placeholder="Correo Electrónico" required>
+            <textarea name="message" placeholder="Tu Mensaje" rows="6" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Data Driver. Todos los derechos reservados. | <a href="#">Política de Privacidad</a></p>
+    </footer>
+
+</body>
+</html>
+

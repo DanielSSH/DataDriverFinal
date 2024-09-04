@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Búsqueda por Cédula</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Búsqueda de Usuarios por Cédula</h1>
+    <form method="POST">
+        <label for="cedula">Número de Cédula:</label>
+        <input type="search" id="cedula" name="cedula" required>
+        <button type="submit">Buscar</button>
+    </form>
+
+    {% if resultado %}
+        <h2>Resultado de la búsqueda:</h2>
+        <p>Nombre: {{ resultado['nombre'] }}</p>
+        <p>Email: {{ resultado['email'] }}</p>
+    {% elif resultado is not none %}
+        <p>No se encontró ningún usuario con esa cédula.</p>
+    {% endif %}
+</body>
+</html>
+
