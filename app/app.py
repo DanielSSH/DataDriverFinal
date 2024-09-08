@@ -32,6 +32,44 @@ def consultar_conductor():
     return render_template('resultado_busqueda.html', conductor=conductor)
 
 
+@app.route('/registro', methods=['GET', 'POST'])
+def registro_conductor():
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        apellido = request.form['apellido']
+        cedula = request.form['cedula']
+        licencia = request.form['licencia']
+
+        if not nombre or not apellido or not cedula or not licencia:
+            Flash('Todos los campos son obligatorios.', 'error')
+            return redirect(url_for('registro_conductor'))
+
+        conductor_existente = Conductor.query.filter_by(cedula=cedula).first()
+        if conductor_existente:
+            Flash('La cédula ya está registrada.', 'error')
+            return redirect(url_for('registro_conductor'))
+
+        nuevo_conductor = Conductor(
+            nombre=nombre,
+            apellido=apellido,
+            cedula=cedula,
+            licencia=licencia
+        )
+
+        try:
+            db.session.add(nuevo_conductor)
+            db.session.commit()
+            flash('Conductor registrado con éxito.', 'success')
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Error al registrar el conductor: {str(e)}', 'error')
+
+       
+        return redirect(url_for('registro.html'))
+
+    return render_template('registro.html')
+
+
 @app.before_request
 def before_request():
     print("Antes de la petición...")
