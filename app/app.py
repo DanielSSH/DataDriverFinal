@@ -4,7 +4,6 @@ from MySQLdb.cursors import DictCursor
 
 app = Flask(__name__)
 
-# Configuración de MySQL
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'Zonapets12345*'
@@ -39,21 +38,39 @@ def registro_conductor():
         apellido = request.form['apellido']
         cedula = request.form['cedula']
         licencia = request.form['licencia']
+        tu_nombre = request.form['tu_nombre']
+        celular = request.form['celular']
+        placas = request.form['placas']
+        nombre_propietario = request.form['nombre_propietario']
+        documento_propietario = request.form['documento_propietario']
+        email_propietario = request.form['email_propietario']
+        email_conductor = request.form['email_conductor']
+        motivo_reporte = request.form['motivo_reporte']
+        calificacion = request.form.getlist('calificacion')
 
         if not nombre or not apellido or not cedula or not licencia:
-            Flash('Todos los campos son obligatorios.', 'error')
+            flash('Todos los campos son obligatorios.', 'error')
             return redirect(url_for('registro_conductor'))
 
         conductor_existente = Conductor.query.filter_by(cedula=cedula).first()
         if conductor_existente:
-            Flash('La cédula ya está registrada.', 'error')
+            flash('La cédula ya está registrada.', 'error')
             return redirect(url_for('registro_conductor'))
 
         nuevo_conductor = Conductor(
             nombre=nombre,
             apellido=apellido,
             cedula=cedula,
-            licencia=licencia
+            licencia=licencia,
+            tu_nombre=tu_nombre,
+            celular=celular,
+            placas=placas,
+            nombre_propietario=nombre_propietario,
+            documento_propietario=documento_propietario,
+            email_propietario=email_propietario,
+            email_conductor=email_conductor,
+            motivo_reporte=motivo_reporte,
+            calificacion=','.join(calificacion)
         )
 
         try:
@@ -64,40 +81,12 @@ def registro_conductor():
             db.session.rollback()
             flash(f'Error al registrar el conductor: {str(e)}', 'error')
 
-       
-        return redirect(url_for('registro.html'))
+        print(request.form)
+
+        return redirect(url_for('registro_conductor'))
 
     return render_template('registro.html')
 
-
-@app.before_request
-def before_request():
-    print("Antes de la petición...")
-
-@app.after_request
-def after_request(response):
-    print("Después de la petición...")
-    return response
-
-@app.route('/')
-def index():
-    cursos = ['PHP', 'Python', 'Java', 'Kotlin', 'Dart', 'JavaScript']
-    data = {
-        'titulo': 'DATA DRIVER',
-        'bienvenida': '¡Saludos!',
-        'cursos': cursos,
-        'numero_conductores': len(cursos)
-    }
-    return render_template('index.html', data=data)
-
-@app.route('/contacto/<nombre>/<int:edad>')
-def contacto(nombre, edad):
-    data = {
-        'titulo': 'contacto',
-        'nombre': nombre,
-        'edad': edad
-    }
-    return render_template('contacto.html', data=data)
 
 @app.route('/conductores')
 def listar_conductores():
