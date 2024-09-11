@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, url_for, redirect, jsonify
 from flask_mysqldb import MySQL
 from MySQLdb.cursors import DictCursor
+import redis 
 
 app = Flask(__name__)
+cache = redis.Redis(host='redis', port=6379)
+
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
