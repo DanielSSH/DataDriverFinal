@@ -24,4 +24,4 @@ services:
       MYSQL_ROOT_PASSWORD: Zonapets12345*
       MYSQL_DATABASE: dbdatadriver
     ports:
-      - "3306:
+      - "3306"

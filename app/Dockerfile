@@ -1,14 +1,39 @@
+# Usa una imagen base de Python
+FROM python:3.11-alpine
 
-FROM python:3.9-slim
+# Instala las dependencias del sistema necesarias
+RUN apk update && apk add --no-cache \
+        gcc \
+        musl-dev \
+        mariadb-dev \
+        mariadb-connector-c-dev \
+        libffi-dev \
+        openssl-dev \
+        libxml2-dev \
+        libxslt-dev \
+        pkgconfig \
+        build-base \
+        mariadb-client \
+        python3 \
+        py3-pip  # Instalación de pip para Python 3
 
-WORKDIR /app
-
+# Copia el archivo de requisitos
 COPY requirements.txt .
 
-RUN pip install --no-cache-dir -r requirements.txt
+# Instala las dependencias de Python
+RUN pip3 install --no-cache-dir -r requirements.txt
 
-COPY . .
+# Copia el resto del código de la aplicación
+COPY . /app
 
-EXPOSE 5000
+# Establece el directorio de trabajo
+WORKDIR /app
 
-CMD ["python", "app.py"]
+# Comando para ejecutar la aplicación
+CMD ["gunicorn", "-b", "0.0.0.0:8000", "app:app"]
+
+
+
+
+
+
